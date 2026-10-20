@@ -1,0 +1,40 @@
+Задание2
+ct - карта
+lp - предыдущий перевод
+am - сумма перевода
+*/
+fun cl(
+    ct: String = "VK Pay",
+    lp: Int = 0,
+    am: Int
+): Double {
+    return when {
+        ct == "VK Pay" -> 0.0
+        ct == "MasterCard" || ct == "Maestro" -> {
+            if (lp + am <= 75000) 0.0
+            else am * 0.006 + 20.0
+        }
+        ct == "Visa" || ct == "Mir" -> {
+            val cm = am * 0.0075
+            if (cm < 35) 35.0
+            else cm
+        }
+        else -> 0.0
+    }
+}
+fun main() {
+    // Проверка1
+    println("Задача 1")
+    println()
+    println(fu(30))
+    println(fu(300))
+    println(fu(7200))
+    println(fu(100000))
+    // Проверка2
+    println("Задача 2")
+    println()
+    val am = 44000
+    val cm = cl(ct = "Visa", lp = 0, am = am)
+    println("Сумма: $am руб")
+    println("Комиссия: $cm руб")
+}
